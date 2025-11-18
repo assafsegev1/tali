@@ -2,7 +2,11 @@
 import { GoogleGenAI } from "@google/genai";
 
 const apiKey = import.meta.env.VITE_API_KEY;
-const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
+if (!apiKey) throw new Error("VITE_API_KEY is missing!");
+
+const ai = new GoogleGenAI({ apiKey });
+
+console.log(ai.models);
 
 export interface EvaluationResult {
   score: number;
